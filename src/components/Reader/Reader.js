@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import Publication from '../Publication/Publication';
 import Counter from '../Counter/Counter';
 import Controls from '../Controls/Controls';
+import styles from './Reader.module.css';
 
 const getIndex = (items, activeItem) => items.indexOf(activeItem);
 
 export default class Reader extends Component {
-  //   static defaultProps = {
-  //     step: 1,
-  //     initialValue: 0,
-  //   };
-
   static propTypes = {
     items: PropTypes.arrayOf(
       PropTypes.shape({
@@ -22,15 +18,26 @@ export default class Reader extends Component {
     ).isRequired,
   };
 
+  state = {
+    items: this.props.items,
+    indexMin: 0,
+    indexMax: this.props.items.length,
+    activeItem: this.props.items[3],
+    activeIndex: 4,
+    btnDisabledUp: false,
+    btnDisabledBack: false,
+  };
+
   handleBack = () => {
     const { items, activeItem, indexMin } = this.state;
 
     const index = getIndex(items, activeItem);
     if (index - 1 === indexMin) {
-      this.setState({ btnDisabledBack: true });
+      this.setState({ btnDisabledBack: true, activeIndex: indexMin + 2 });
     }
     this.setState(state => ({
       activeItem: state.items[index - 1],
+      activeIndex: state.activeIndex - 1,
       btnDisabledUp: false,
     }));
   };
@@ -38,30 +45,28 @@ export default class Reader extends Component {
   handleUp = () => {
     const { items, activeItem, indexMax } = this.state;
     const index = getIndex(items, activeItem);
-    if (index + 1 === indexMax) {
-      this.setState({ btnDisabledUp: true });
+    if (index + 1 === indexMax - 1) {
+      this.setState({ btnDisabledUp: true, activeIndex: indexMax - 1 });
     }
     this.setState(state => ({
       activeItem: state.items[index + 1],
+      activeIndex: state.activeIndex + 1,
       btnDisabledBack: false,
     }));
   };
 
-  state = {
-    items: this.props.items,
-    indexMin: 0,
-    indexMax: this.props.items.length - 1,
-    activeItem: this.props.items[3],
-    btnDisabledUp: false,
-    btnDisabledBack: false,
-  };
-
   render() {
-    const { activeItem, btnDisabledUp, btnDisabledBack } = this.state;
+    const {
+      activeItem,
+      btnDisabledUp,
+      btnDisabledBack,
+      indexMax,
+      activeIndex,
+    } = this.state;
     return (
-      <div className="reader">
+      <div className={styles.reader}>
         <Publication item={activeItem} />
-        <Counter />
+        <Counter activeIndex={activeIndex} itemTotal={indexMax} />
         <Controls
           onBack={this.handleBack}
           onUp={this.handleUp}

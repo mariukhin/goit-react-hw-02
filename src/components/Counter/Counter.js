@@ -1,23 +1,25 @@
-/* eslint-disable */
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import styles from './Counter.module.css';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export default class Counter extends Component {
-  //   static defaultProps = {
-  //     step: 1,
-  //     initialValue: 0,
-  //   };
+  static defaultProps = {
+    activeIndex: 0,
+    itemTotal: 0,
+  };
 
-  //   static propTypes = {
-  //     step: PropTypes.number,
-  //     initialValue: PropTypes.number,
-  //   };
-
-  //   state = {
-  //     value: this.props.initialValue,
-  //   };
+  static propTypes = {
+    activeIndex: PropTypes.number,
+    itemTotal: PropTypes.number,
+  };
 
   render() {
-    return <p className="counter">3/10</p>;
+    const { activeIndex, itemTotal } = this.props;
+    return (
+      <p className={styles.counter}>
+        {activeIndex}/{itemTotal}
+      </p>
+    );
   }
 }

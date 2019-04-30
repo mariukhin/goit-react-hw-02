@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styles from './Publication.module.css';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export default class Publication extends Component {
-  //   static defaultProps = {
-  //     step: 1,
-  //     initialValue: 0,
-  //   };
-
   static propTypes = {
     item: PropTypes.shape({
       title: PropTypes.string.isRequired,
@@ -15,11 +12,12 @@ export default class Publication extends Component {
   };
 
   render() {
-    const { title, text } = this.props.item;
+    const { item } = this.props;
+    const { title, text } = item;
     return (
-      <section className="publication">
-        <h2 className="title">{title}</h2>
-        <p className="text">{text}</p>
+      <section className={styles.publication}>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.text}>{text}</p>
       </section>
     );
   }

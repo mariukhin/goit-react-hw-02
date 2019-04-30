@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styles from './Controls.module.css';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export default class Controls extends Component {
-  //   static defaultProps = {
-  //     step: 1,
-  //     initialValue: 0,
-  //   };
+  static defaultProps = {
+    disabledUp: false,
+    disabledBack: false,
+  };
 
   static propTypes = {
     disabledUp: PropTypes.bool,
@@ -14,18 +16,24 @@ export default class Controls extends Component {
     onUp: PropTypes.func.isRequired,
   };
 
-  //   state = {
-  //     value: this.props.initialValue,
-  //   };
-
   render() {
     const { onBack, onUp, disabledUp, disabledBack } = this.props;
     return (
-      <section className="controls">
-        <button className="button" onClick={onBack} disabled={disabledBack}>
+      <section className={styles.controls}>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={onBack}
+          disabled={disabledBack}
+        >
           Назад
         </button>
-        <button className="button" onClick={onUp} disabled={disabledUp}>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={onUp}
+          disabled={disabledUp}
+        >
           Вперед
         </button>
       </section>
