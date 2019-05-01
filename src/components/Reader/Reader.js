@@ -20,7 +20,6 @@ export default class Reader extends Component {
 
   state = {
     items: this.props.items,
-    indexMin: 0,
     indexMax: this.props.items.length,
     activeItem: this.props.items[3],
     activeIndex: 4,
@@ -29,8 +28,9 @@ export default class Reader extends Component {
   };
 
   handleBack = () => {
-    const { items, activeItem, indexMin } = this.state;
+    const { items, activeItem } = this.state;
 
+    const indexMin = 0;
     const index = getIndex(items, activeItem);
     if (index - 1 === indexMin) {
       this.setState({ btnDisabledBack: true, activeIndex: indexMin + 2 });
