@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Reader from './Reader/Reader';
 import MoviePage from './MoviePage/MoviePage';
+import Dashboard from './Dashboard/Dashboard';
 
 const App = ({ items, movies }) => (
   <div>
     <Reader items={items} />
     <MoviePage movies={movies} />
+    <Dashboard />
   </div>
 );
 App.propTypes = {

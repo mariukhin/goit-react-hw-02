@@ -1,0 +1,10 @@
+.history {
+  width: 250px;
+  margin: 0 auto;
+  border: 1px solid black;
+  text-align: center;
+  margin-bottom: 40px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+}
