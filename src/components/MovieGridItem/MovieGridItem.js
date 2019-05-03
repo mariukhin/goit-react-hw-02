@@ -1,30 +1,19 @@
-/* eslint-disable */
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-// import styles from './Controls.module.css';
+import styles from './MovieGridItem.module.css';
 
-export default class MovieGridItem extends Component {
-  //   static defaultProps = {
-  //     disabledUp: false,
-  //     disabledBack: false,
-  //   };
-
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    posterUrl: PropTypes.string.isRequired,
-    overview: PropTypes.string.isRequired,
-  };
-
-  render() {
-    const { title, posterUrl, overview } = this.props;
-    return (
-      <Fragment>
-        <img src={posterUrl} alt="" />
-        <div className="content">
-          <h2>{title}</h2>
-          <p>{overview}</p>
-        </div>
-      </Fragment>
-    );
-  }
-}
+const MovieGridItem = ({ title, posterUrl, overview }) => (
+  <Fragment>
+    <img className={styles.itemPhoto} src={posterUrl} alt="" />
+    <div className={styles.content}>
+      <h2 className={styles.title}>{title}</h2>
+      <p className={styles.overview}>{overview}</p>
+    </div>
+  </Fragment>
+);
+MovieGridItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  posterUrl: PropTypes.string.isRequired,
+  overview: PropTypes.string.isRequired,
+};
+export default MovieGridItem;

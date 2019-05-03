@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './SearchBar.module.css';
 
-// import styles from './Controls.module.css';
-
-const SearchBar = ({ value }) => (
+const SearchBar = ({ value, onChangeFilter }) => (
   <input
     type="text"
-    className="input"
+    className={styles.input}
     value={value}
-    // onChange={onChangeFilter}
+    onChange={onChangeFilter}
     placeholder="Type to filter movies..."
   />
 );
 SearchBar.propTypes = {
   value: PropTypes.string.isRequired,
+  onChangeFilter: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

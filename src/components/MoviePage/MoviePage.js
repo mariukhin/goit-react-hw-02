@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import Publication from '../Publication/Publication';
-// import Counter from '../Counter/Counter';
-// import Controls from '../Controls/Controls';
-// import styles from './Reader.module.css';
+import styles from './MoviePage.module.css';
 import MovieGrid from '../MovieGrid/MovieGrid';
 import SearchBar from '../SearchBar/SearchBar';
 
-// const getIndex = (items, activeItem) => items.indexOf(activeItem);
-
+const filterMovies = (movies, filter) => {
+  return movies.filter(movie =>
+    movie.title.toLowerCase().includes(filter.toLowerCase()),
+  );
+};
 export default class MoviePage extends Component {
   static propTypes = {
     movies: PropTypes.arrayOf(
@@ -23,42 +23,24 @@ export default class MoviePage extends Component {
 
   state = {
     movies: this.props.movies,
+    filter: '',
   };
 
-  //   handleBack = () => {
-  //     const { items, activeItem } = this.state;
-
-  //     const indexMin = 0;
-  //     const index = getIndex(items, activeItem);
-  //     if (index - 1 === indexMin) {
-  //       this.setState({ btnDisabledBack: true, activeIndex: indexMin + 2 });
-  //     }
-  //     this.setState(state => ({
-  //       activeItem: state.items[index - 1],
-  //       activeIndex: state.activeIndex - 1,
-  //       btnDisabledUp: false,
-  //     }));
-  //   };
-
-  //   handleUp = () => {
-  //     const { items, activeItem, indexMax } = this.state;
-  //     const index = getIndex(items, activeItem);
-  //     if (index + 1 === indexMax - 1) {
-  //       this.setState({ btnDisabledUp: true, activeIndex: indexMax - 1 });
-  //     }
-  //     this.setState(state => ({
-  //       activeItem: state.items[index + 1],
-  //       activeIndex: state.activeIndex + 1,
-  //       btnDisabledBack: false,
-  //     }));
-  //   };
+  changeFilter = e => {
+    this.setState({ filter: e.target.value });
+  };
 
   render() {
-    const { movies } = this.state;
+    const { movies, filter } = this.state;
+    const filteredMovies = filterMovies(movies, filter);
     return (
-      <div className="container">
-        <SearchBar />
-        <MovieGrid movies={movies} />
+      <div className={styles.container}>
+        <SearchBar value={filter} onChangeFilter={this.changeFilter} />
+        {filteredMovies.length > 0 ? (
+          <MovieGrid movies={filteredMovies} />
+        ) : (
+          <p>No matching results!</p>
+        )}
       </div>
     );
   }

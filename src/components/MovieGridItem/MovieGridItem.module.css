@@ -1,0 +1,19 @@
+.content {
+  padding: 8px;
+}
+
+.itemPhoto {
+  display: block;
+  max-width: 100%;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.overview {
+  margin-bottom: 0;
+  line-height: 1.5;
+}

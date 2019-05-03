@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Reader from './Reader/Reader';
 import MoviePage from './MoviePage/MoviePage';
-import '../styles.css';
 
 const App = ({ items, movies }) => (
   <div>
