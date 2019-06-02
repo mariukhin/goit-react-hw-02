@@ -4,7 +4,7 @@ import MovieGridItem from '../MovieGridItem/MovieGridItem';
 import styles from './MovieGrid.module.css';
 
 const MovieGrid = ({ movies }) =>
-  movies.length > 0 && (
+  movies.length && (
     <div className={styles.movieGrid}>
       {movies.map(item => (
         <div className={styles.movieCard} key={item.id}>

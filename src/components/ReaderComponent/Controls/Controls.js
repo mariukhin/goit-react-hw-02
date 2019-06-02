@@ -2,34 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Controls.module.css';
 
-const Controls = ({ onBack, onUp, disabledUp, disabledBack }) => (
+const Controls = ({ onButtonClick, disabled }) => (
   <section className={styles.controls}>
     <button
       type="button"
+      name="backBtn"
       className={styles.button}
-      onClick={onBack}
-      disabled={disabledBack}
+      onClick={onButtonClick}
+      disabled={disabled === 1}
     >
       Назад
     </button>
     <button
       type="button"
+      name="upBtn"
       className={styles.button}
-      onClick={onUp}
-      disabled={disabledUp}
+      onClick={onButtonClick}
+      disabled={disabled === 12}
     >
       Вперед
     </button>
   </section>
 );
 Controls.propTypes = {
-  disabledUp: PropTypes.bool,
-  disabledBack: PropTypes.bool,
-  onBack: PropTypes.func.isRequired,
-  onUp: PropTypes.func.isRequired,
-};
-Controls.defaultProps = {
-  disabledUp: false,
-  disabledBack: false,
+  disabled: PropTypes.number.isRequired,
+  onButtonClick: PropTypes.func.isRequired,
 };
 export default Controls;

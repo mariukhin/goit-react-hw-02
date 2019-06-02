@@ -3,12 +3,8 @@ import PropTypes from 'prop-types';
 import styles from './MoviePage.module.css';
 import MovieGrid from '../MovieGrid/MovieGrid';
 import SearchBar from '../SearchBar/SearchBar';
+import { filterMovies } from '../../../services/helper';
 
-const filterMovies = (movies, filter) => {
-  return movies.filter(movie =>
-    movie.title.toLowerCase().includes(filter.toLowerCase()),
-  );
-};
 export default class MoviePage extends Component {
   static propTypes = {
     movies: PropTypes.arrayOf(
@@ -22,22 +18,21 @@ export default class MoviePage extends Component {
   };
 
   state = {
-    movies: this.props.movies,
     filter: '',
   };
 
-  changeFilter = e => {
-    this.setState({ filter: e.target.value });
+  changeFilter = ({ target: { value } }) => {
+    this.setState({ filter: value });
   };
 
   render() {
-    const { movies, filter } = this.state;
-    const filteredMovies = filterMovies(movies, filter);
+    const { filter } = this.state;
+    const { movies } = this.props;
     return (
       <div className={styles.container}>
         <SearchBar value={filter} onChangeFilter={this.changeFilter} />
-        {filteredMovies.length > 0 ? (
-          <MovieGrid movies={filteredMovies} />
+        {filterMovies(movies, filter).length ? (
+          <MovieGrid movies={filterMovies(movies, filter)} />
         ) : (
           <p>No matching results!</p>
         )}

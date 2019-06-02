@@ -4,14 +4,8 @@ import styles from './Dashboard.module.css';
 import Balance from '../Balance/Balance';
 import DashboardControls from '../DashboardControls/DashboardControls';
 import TransactionHistory from '../TransactionHistory/TransactionHistory';
+import { checkBalance } from '../../../services/helper';
 
-const checkBalance = (inputVal, balance) => {
-  const result = balance - inputVal;
-  if (result >= 0) {
-    return true;
-  }
-  return false;
-};
 export default class Dashboard extends Component {
   state = {
     inputVal: '',
@@ -69,8 +63,8 @@ export default class Dashboard extends Component {
     }
   };
 
-  changeInput = e => {
-    this.setState({ inputVal: e.target.value });
+  changeInput = ({ target: { value } }) => {
+    this.setState({ inputVal: value });
   };
 
   render() {

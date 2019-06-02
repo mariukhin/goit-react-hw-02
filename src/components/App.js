@@ -1,31 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Reader from './Reader/Reader';
-import MoviePage from './MoviePage/MoviePage';
-import Dashboard from './Dashboard/Dashboard';
+import Reader from './ReaderComponent/Reader/Reader';
+import MoviePage from './MoviePageComponent/MoviePage/MoviePage';
+import Dashboard from './DashboardComponent/Dashboard/Dashboard';
+import publications from '../assets/publications.json';
+import movies from '../assets/movies.json';
 
-const App = ({ items, movies }) => (
+const App = () => (
   <div>
-    <Reader items={items} />
+    <Reader items={publications} />
     <MoviePage movies={movies} />
     <Dashboard />
   </div>
 );
-App.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
-  movies: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      posterUrl: PropTypes.string.isRequired,
-      overview: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
-};
 export default App;
